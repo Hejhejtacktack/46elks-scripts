@@ -13,7 +13,7 @@ parser.add_argument('receivers', type=str,
 parser.add_argument('-m', '--message', type=str, default="Hej",
                     help="The message to send. Enclose the message in quotes if it contains spaces. Default is 'Hej'.")
 parser.add_argument('--sender', type=str, default="Elks",
-                    help="The sender's name. Enclose the message in quotes if it contains spaces. Default is 'Elks'.")
+                    help="The name of sender in a short format. Default is 'Elks'.")
 
 args = parser.parse_args()
 
