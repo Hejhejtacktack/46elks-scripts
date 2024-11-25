@@ -3,7 +3,7 @@ import csv
 
 def csv_to_list(file_path):
     """
-    Takes a file path to a csv file and returns a list of lists.
+    Takes a file path to a csv file and returns a list of strings.
     :param file_path: the file path of the csv file
     :return: a list of strings hopefully containing phone numbers
     :rtype: list(string)
@@ -19,3 +19,4 @@ def csv_to_list(file_path):
         raise OSError("An error occurred while reading the CSV file: {0}".format(os_e))
 
     return rows
+
