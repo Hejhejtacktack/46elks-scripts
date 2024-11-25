@@ -35,6 +35,7 @@ api_password = args.api_password
 receivers = args.receivers  # Str containing a phone number or a file path
 message = args.message
 sender = args.sender
+image = args.image
 
 # Makes receivers a list
 receivers = [receivers] if receivers.startswith("+") else csv_to_list(receivers)
@@ -44,9 +45,9 @@ for phone_number in receivers:
         "https://api.46elks.com/a1/MMS",
         auth=(api_username, api_password),
         data={
-            "from": "",
-            "to": "+46766861004",
-            "image": "https://yourserver.example/images/treasuremap.jpg"
+            "from": sender,
+            "to": phone_number,
+            "image": image
         }
     )
     print(response.text)
