@@ -1,6 +1,6 @@
 import requests
 import argparse
-from utils.converter import csv_to_list
+from utils.utils import csv_to_list
 
 
 parser = argparse.ArgumentParser(description="Send an SMS using 46elks API.")

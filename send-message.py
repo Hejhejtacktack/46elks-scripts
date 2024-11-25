@@ -1,7 +1,6 @@
 import requests
 import argparse
-import urllib.parse
-from utils.converter import csv_to_list
+from utils.utils import csv_to_list
 
 API_URLS = ('https://api.46elks.com/a1/sms', "https://api.46elks.com/a1/MMS")
 
