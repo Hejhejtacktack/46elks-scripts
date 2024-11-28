@@ -10,3 +10,6 @@ __pycache__/
 
 # PyCharm module files
 *.iml
+
+# Sensitive data
+.env

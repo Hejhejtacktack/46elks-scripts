@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/46elks-sms-handler.iml" filepath="$PROJECT_DIR$/.idea/46elks-sms-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/46elks-call-handler.iml" filepath="$PROJECT_DIR$/.idea/46elks-call-handler.iml" />
     </modules>
   </component>
 </project>
