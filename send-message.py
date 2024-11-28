@@ -4,11 +4,11 @@ from utils.utils import csv_to_list
 
 API_URLS = ('https://api.46elks.com/a1/sms', "https://api.46elks.com/a1/MMS")
 
-def send():
+def send_message(api_url, api_auth, api_data):
     response = requests.post(
-        url,
-        auth=auth,
-        data=data
+        api_url,
+        auth=api_auth,
+        data=api_data
     )
     print(response.text)
 
@@ -55,4 +55,4 @@ if args.image is not None:
     url = API_URLS[1]
     data['image'] = args.image
 
-send()
+send_message(url, auth, data)
