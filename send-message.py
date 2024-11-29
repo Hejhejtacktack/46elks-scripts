@@ -6,6 +6,7 @@ import os
 
 load_dotenv()
 
+
 def send_message(api_url, api_auth, api_data):
     response = requests.post(
         api_url,
@@ -13,6 +14,7 @@ def send_message(api_url, api_auth, api_data):
         data=api_data
     )
     print(response.text)
+
 
 parser = argparse.ArgumentParser(description="Send an message using 46elks API.")
 
@@ -38,15 +40,18 @@ parser.add_argument('--message',
 parser.add_argument('--image',
                     type=str,
                     default=None,
-                    help= "A publicly accessible URL pointing to an image file or a Base64/url-encoded string containing representation of an image.")
+                    help="A publicly accessible URL pointing to an image file or a Base64/url-encoded string containing representation of an image.")
 
 args = parser.parse_args()
 
 # Makes receivers a list if argument does not start with "+"
 receivers = [args.receivers] if args.receivers.startswith("+") else csv_to_list(args.receivers)
 
+auth = (os.getenv('API_USERwNAME'), os.getenv('API_PASSeWORD'))
 
-auth = (os.getenv('API_USERNAME'), os.getenv('API_PASSWORD'))
+if auth.__contains__(None):
+    raise ValueError('No API credentials provided.')
+
 data = {
     "from": args.sender,
     "to": args.receivers,
@@ -54,10 +59,10 @@ data = {
 }
 
 # Setting API url
-if args.image is not None: # If image is present in data
+if args.image is not None:  # If image is present in data
     url = os.getenv('API_URL_MMS')
     data['image'] = args.image
-else: # If image is not present in data
+else:  # If image is not present in data
     url = os.getenv('API_URL_SMS')
 
 send_message(url, auth, data)
