@@ -1,8 +1,10 @@
 import requests
 import argparse
 from utils.utils import csv_to_list
+from dotenv import load_dotenv
+import os
 
-API_URLS = ('https://api.46elks.com/a1/sms', "https://api.46elks.com/a1/MMS")
+load_dotenv()
 
 def send_message(api_url, api_auth, api_data):
     response = requests.post(
@@ -14,12 +16,12 @@ def send_message(api_url, api_auth, api_data):
 
 parser = argparse.ArgumentParser(description="Send an message using 46elks API.")
 
-parser.add_argument('api_username',
-                    type=str,
-                    help="Your 46elks API username (provided by 46elks).")
-parser.add_argument('api_password',
-                    type=str,
-                    help="Your 46elks API password (provided by 46elks).")
+# parser.add_argument('api_username',
+#                     type=str,
+#                     help="Your 46elks API username (provided by 46elks).")
+# parser.add_argument('api_password',
+#                     type=str,
+#                     help="Your 46elks API password (provided by 46elks).")
 parser.add_argument('receivers',
                     type=str,
                     help="Receiver phone number in E.164 format (e.g., +46701234567) or a path to a CSV file with phone numbers.")
@@ -27,8 +29,8 @@ parser.add_argument('receivers',
 # Optional arguments
 parser.add_argument('--sender',
                     type=str,
-                    default="ELks",
-                    help="The name of sender in a short format. Default is 'Elks'. To send MMS use 'noreply'")
+                    default="noreply",
+                    help="The name of sender in a short format. Default is 'noreply'. To send MMS use 'noreply'")
 parser.add_argument('--message',
                     type=str,
                     default="Hej",
@@ -40,19 +42,22 @@ parser.add_argument('--image',
 
 args = parser.parse_args()
 
-# Makes receivers a list
+# Makes receivers a list if argument does not start with "+"
 receivers = [args.receivers] if args.receivers.startswith("+") else csv_to_list(args.receivers)
 
-url = API_URLS[0]
-auth = (args.api_username, args.api_password)
+
+auth = (os.getenv('API_USERNAME'), os.getenv('API_PASSWORD'))
 data = {
     "from": args.sender,
     "to": args.receivers,
     "message": args.message
 }
 
-if args.image is not None:
-    url = API_URLS[1]
+# Setting API url
+if args.image is not None: # If image is present in data
+    url = os.getenv('API_URL_MMS')
     data['image'] = args.image
+else: # If image is not present in data
+    url = os.getenv('API_URL_SMS')
 
 send_message(url, auth, data)
