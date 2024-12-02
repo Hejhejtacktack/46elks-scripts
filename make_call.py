@@ -6,6 +6,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def call(api_auth, api_data):
+    response = requests.post(
+        os.getenv("API_URL_CALLS"),
+        data=api_data,
+        auth=api_auth,
+    )
+    print(response.text)
+
 parser = argparse.ArgumentParser(description="Make a call and forward it to {who?} using 46elks' API")
 
 parser.add_argument("API_USERNAME", type=str, help="Your 46elks API username")
@@ -21,7 +29,6 @@ auth = (
     os.getenv('API_PASSWORD')
     )
 
-# WHATS THE INTENT HERE
 action = {
     "connect" : os.getenv('CAROLINE_PHONE_NUMBER')
 }
@@ -29,13 +36,7 @@ action = {
 data = {
     'from': args.caller,
     'to': args.callee,
-    'voice_start': json.dumps(action),
+    'voice_start': json.dumps(action)
     }
 
-response = requests.post(
-    "https://api.46elks.com/a1/calls",
-    data=data,
-    auth=auth
-    )
-
-print(response.text)
+call(auth, data)
