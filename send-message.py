@@ -47,23 +47,23 @@ args = parser.parse_args() # Konverterar strings till object och definierar dem 
 # Makes receivers a list if argument does not start with "+"
 receivers = [args.receivers] if args.receivers.startswith("+") else csv_to_list(args.receivers) # Instansierar receivers till en lista
 
-auth = (os.getenv('API_USERNAME'), os.getenv('API_PASSWORD'))
+auth = (os.getenv('API_USERNAME'), os.getenv('API_PASSWORD')) # Instansierar en variabel till en lista innehållandes vad os.getenv returnerar baserat på en key
 
-if auth.__contains__(None):
-    raise ValueError('No API credentials provided.')
+if auth.__contains__(None): # Kör nedanstående kodrad, om kravet att listan auth innehåller None uppfylls
+    raise ValueError('No API credentials provided.') # Genererar ett ValueError och stoppar exekveringen
 
-data = {
-    "from": args.sender,
-    "message": args.message
+data = { # Definierar och intansierar en variabel innehållandes ett Set
+    "from": args.sender, # Ett element i Setet
+    "message": args.message # Ett element i Setet
 }
 
 # Setting API url
-if args.image is not None:  # If image is present in data
-    url = os.getenv('API_URL_MMS')
-    data['image'] = args.image
-else:  # If image is not present in data
-    url = os.getenv('API_URL_SMS')
+if args.image is not None:  # Kör nedanstående kodrader, om kravet att args.image inte innehåller None uppfylls
+    url = os.getenv('API_URL_MMS') # Definierar och intansierar en variabel till vad metoden os.getenv returnerar
+    data['image'] = args.image # Adderar ett element med keyn image och valuet i args.image till setet data
+else: # Kör nedanstående kodrad om inte kravet i if-statementet uppfylls
+    url = os.getenv('API_URL_SMS') # Instansierar variabeln url till vad os.getenv rerturnerar
 
-for phone_number in receivers:
-    data['to'] = phone_number
-    send_message(url, auth, data)
+for phone_number in receivers: # Loopar genom alla element i listan receivers
+    data['to'] = phone_number # Adderar ett element med keyn to och valuet i phone_number till setet data
+    send_message(url, auth, data) # Kallar på funktionen send_message och skickar in 3 variabler som parametrar
