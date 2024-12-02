@@ -21,11 +21,12 @@ auth = (
     os.getenv('API_PASSWORD')
     )
 
+# WHATS THE INTENT HERE
 action = {
-    "connect" : os.getenv('CAROLINE_PHONE_NUMBER') # Make user choose action?
+    "connect" : os.getenv('CAROLINE_PHONE_NUMBER')
 }
 
-fields = {
+data = {
     'from': args.caller,
     'to': args.callee,
     'voice_start': json.dumps(action),
@@ -33,7 +34,7 @@ fields = {
 
 response = requests.post(
     "https://api.46elks.com/a1/calls",
-    data=fields,
+    data=data,
     auth=auth
     )
 

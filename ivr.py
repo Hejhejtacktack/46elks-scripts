@@ -24,6 +24,10 @@ def ivr():
     print(request.form)
     if request.form['result'] == '1':
         # SPELA LJUDFIL OCH SKICKA SMS
+        response = {
+            'play' : 'https://www.46elks.com/static/sound/smsinfo.mp3'
+        }
+        return json.dumps(response)
     if request.form['result'] == '2':
         # RING JOAKIM
 
