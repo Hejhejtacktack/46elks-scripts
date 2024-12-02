@@ -24,17 +24,6 @@ def ivr():
     print(request.form)
     if request.form['result'] == '1':
         # SPELA LJUDFIL OCH SKICKA SMS
-        # return {'play' : 'https://46elks.com/static/sound/smsinfo.mp3'} # TODO
-        # response = requests.post(
-        #     'https://api.46elks.com/a1/sms',
-        #     auth=(os.getenv('API_USERNAME'), os.getenv('API_PASSWORD')),
-        #     data={
-        #         'from': 'ErikCo',
-        #         'to': request.form.get('from'),
-        #         'message': 'Here is a text message after you ended the call.'
-        #     }
-        # )
-        # print(response.text)
     if request.form['result'] == '2':
         # RING JOAKIM
 
