@@ -3,6 +3,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from flask import Flask, request
+from make_and_forward_call import call
 
 app = Flask(__name__)
 
@@ -30,7 +31,7 @@ def ivr():
         return json.dumps(response)
     if request.form['result'] == '2':
         # RING JOAKIM
-
+        call(os.getenv("API_USERNAME"), os.getenv("API_PASSWORD"))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
