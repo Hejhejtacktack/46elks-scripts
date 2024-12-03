@@ -7,6 +7,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def call(api_auth, api_data):
+    """
+    :param api_auth: A tuple containing two elements - the API username and API password.
+    :param api_data: A dict containing API data
+    """
     response = requests.post(
         os.getenv("API_URL_CALLS"),
         data=api_data,
