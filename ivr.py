@@ -16,7 +16,7 @@ def incoming_calls():
     response = {
         'ivr': 'https://46elks.com/static/sound/voiceinfo.mp3',
         'digits': '1',
-        'next': 'https://68bb-80-217-213-152.ngrok-free.app/ivr/choice'
+        'next': '{INPUT GENERATED NGROK THING HERE}/ivr/choice'
     }
     return json.dumps(response)
 
@@ -37,7 +37,7 @@ def ivr():
         return json.dumps(response)
     if request.form['result'] == '2':
         response = {
-            'connect': os.getenv('PHONE_NUM_CAROLINE'),
+            'connect': os.getenv('PHONE_NUM_JOAKIM'),
             'callerid': request.form['from']
         }
         return json.dumps(response)
