@@ -24,7 +24,7 @@ def send_message(api_auth: tuple, api_data: dict):  # Definierar en funktion med
     print(response.text)  # Skriver ut parameter via stream eller stdout
 
 
-if __name__ == "__main__":  # Skyddar scriptet mot att man råkar köra det, exempelvis vis imports 
+if __name__ == "__main__":  # Skyddar scriptet mot att man råkar köra det, exempelvis vid imports
     import argparse  # Importerar en extern modul som hanterar inmatning via CLI
 
     parser = argparse.ArgumentParser(
