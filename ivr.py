@@ -16,7 +16,7 @@ def incoming_calls():
     response = {
         'ivr': 'https://46elks.com/static/sound/voiceinfo.mp3',
         'digits': '1',
-        'next': '{INPUT GENERATED NGROK THING HERE}/ivr/choice'
+        'next': '{INSERT NGROK HERE}/ivr/choice'
     }
     return json.dumps(response)
 
