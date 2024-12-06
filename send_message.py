@@ -3,32 +3,31 @@ from utils.utils import csv_to_list  # Importerar funktionen csv_to_list från m
 from dotenv import load_dotenv  # Importerar funktionen load_dotenv från den externa modulen dotenv
 import os  # Importerar en extern modul för att använda operativsystembundna funktioner
 
-load_dotenv()  # Kallar på funktion som översätter en .env fil och laddar in variabler i den
+load_dotenv()  # Kallar på funktion som översätter en .env fil och laddar in variabler från den
 
-def send_message(api_auth: tuple, api_data: dict):  # Definierar en funktion med tre parametrar
+def send_message(api_auth: tuple, api_data: dict):  # Definierar en funktion med två parametrar
     """
     Sends an MMS if 'image' element is present in 'api_data', otherwise an SMS, through the 46elks API
     :param api_auth: The 46elks API credentials (found on 46elks.se)
     :param api_data: The 46elks API data
     """
     if 'image' in api_data:  # Kör nedanstående kodrader, om kravet att keyn 'image' finns i 'api_data' uppfylls
-        api_url = os.getenv('API_URL_MMS')  # Instansierar en variabel till vad requests.post() (som har tre parametrar) returnerar
+        api_url = os.getenv('API_URL_MMS')  # Definierar en variabel och instansierar den till vad getenv() (baserad på paramtern) returnar.
     else:  # Kör nedanstående kodrad om kravet i if-statementet inte uppfylls
-        api_url = os.getenv('API_URL_SMS')
+        api_url = os.getenv('API_URL_SMS') # Definierar en variabel och instansierar den till vad getenv() (baserad på paramtern) returnar.
 
     response = requests.post(  # Instansierar en variabel till vad requests.post() (som har tre parametrar) returnerar
-        api_url,  # En parameter
-        auth=api_auth,  # En parameter
-        data=api_data  # En parameter
+        api_url,  # Ett av tre parameterargument smo funktionen post() förväntar sig. Innehåller url:en till API endpoint.
+        auth=api_auth,  # Ett av tre parameterargument smo funktionen post() förväntar sig. Innehåller inloggningsuppgifter till API endpoint.
+        data=api_data  # Ett av tre parameterargument smo funktionen post() förväntar sig. Innehåller data (payload) som skickas till API endpoint.
     )  # Slutparentes för post()-metoden
-    print(response.text)  # Skriver ut parameter via stream eller stdout
+    print(response.text)  # Skriver ut parameterargumentet, innehållandes svaret från API:t, via stream eller stdout
 
 
 if __name__ == "__main__":  # Skyddar scriptet mot att man råkar köra det, exempelvis vid imports
     import argparse  # Importerar en extern modul som hanterar inmatning via CLI
 
-    parser = argparse.ArgumentParser(
-        description="Send an message using 46elks API.")  # Instansierar en variabel till en instans av klassen ArgumentParser som finns i modulen argparse
+    parser = argparse.ArgumentParser(description="Send an message using 46elks API.")  # Instansierar en variabel till en instans av klassen ArgumentParser som finns i modulen argparse
 
     parser.add_argument('receivers',  # Kallar på funktionen add_argument från objektet parser som adderar en parameter för att exekvera modulen
                         type=str,  # Definierar vilken typ av variabel metoden förväntar sig
