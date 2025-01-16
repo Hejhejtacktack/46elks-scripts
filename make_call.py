@@ -34,13 +34,13 @@ auth = (
     )
 
 action = {
-    "connect" : os.getenv('PHONE_NUM_CAROLINE')
+    "play" : os.getenv('PHONE_NUM_')
 }
 
 data = {
     'from': args.caller,
-    'to': args.callee
-    # 'voice_start': json.dumps(action)
+    'to': args.callee,
+    'voice_start': json.dumps(action)
     }
 
 call(auth, data)
